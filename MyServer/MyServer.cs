@@ -16,13 +16,13 @@ namespace MyServer
     class MyServer : ApplicationBase
     {
         //定义一个ILogger对象，用于日志输出
-        private static readonly ILogger log = LogManager.GetCurrentClassLogger();//只能初始化一次
+        public static readonly ILogger log = LogManager.GetCurrentClassLogger();//只能初始化一次
         
         //当一个客户端请求连接时
         //peerbase表示和一个客户端的连接 由PhotonServer完成调用
         protected override PeerBase CreatePeer(InitRequest initRequest)
         {
-            log.Info("Client Request!");
+            log.Info("Client Request!一个客户端连接过来了");
             return new ClientPeer(initRequest);
         }
         //服务端应用启动的初始化操作  由PhotonServer完成调用
@@ -43,12 +43,12 @@ namespace MyServer
                 XmlConfigurator.ConfigureAndWatch(configFileInfo);
             }
 
-            log.Info("SetUp Completed!");
+            log.Info("SetUp Completed!服务器启动完成");
         }
         //server端关闭 由PhotonServer完成调用
         protected override void TearDown()
         {
-            log.Info("Server is shutdown.");
+            log.Info("Server is shutdown.服务器已关闭");
         }
     }
 }
